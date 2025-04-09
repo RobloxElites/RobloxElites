@@ -1,496 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Roblox Elites: Ascend Your Status</title>
-  <link href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Roblox Elites: Ascend Your Status</title>
+    <link href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --primary-color: #d4af37;
-      --secondary-color: #0099cc;
-      --dark-bg: #0b0c10;
-      --dark-text: #fdfdfd;
-      --light-bg: #f1f1f1;
-      --light-text: #333;
-      --card-dark: rgba(28, 28, 28, 0.85);
-      --card-light: rgba(255, 255, 255, 0.85);
-      --shadow-dark: rgba(0, 0, 0, 0.25);
-      --shadow-light: rgba(0, 0, 0, 0.1);
-      --border-dark: rgba(255, 255, 255, 0.05);
-      --border-light: rgba(0, 0, 0, 0.1);
-    }
+        :root {
+            --primary-color: #ffd700; /* Updated Gold */
+            --secondary-color: #4682b4; /* Steel Blue */
+            --tertiary-color: #3cb371; /* Medium Sea Green */
+            --dark-bg: #121212; /* Deeper Dark */
+            --dark-text: #e0e0e0; /* Light Grey */
+            --light-bg: #f5f5f5; /* Off-White */
+            --light-text: #333;
+            --card-dark: rgba(30, 30, 30, 0.9); /* Slightly more opaque dark card */
+            --card-light: rgba(255, 255, 255, 0.9); /* Slightly more opaque light card */
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            --shadow-light: rgba(0, 0, 0, 0.15);
+            --border-dark: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(0, 0, 0, 0.15);
+            --accent-gradient: linear-gradient(45deg, var(--secondary-color), var(--tertiary-color));
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --animation-speed: 0.3s;
+        }
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--dark-bg);
-      color: var(--dark-text);
-      overflow-x: hidden;
-      transition: background-color 0.5s ease, color 0.5s ease;
-      position: relative; /* For the animated background */
-    }
+        body {
+            font-family: var(--font-body);
+            background: var(--dark-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+            transition: background-color var(--animation-speed) ease-in-out, color var(--animation-speed) ease-in-out;
+            position: relative;
+            padding-bottom: 80px; /* Space for footer */
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: var(--primary-color) var(--dark-bg); /* For Firefox */
+        }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #4a148c, #1a237e, #004d40, #827717, #d84315, #ff6f00);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s infinite alternate;
-      z-index: -1;
-      opacity: 0.3;
-    }
+        /* Chrome, Edge, and Safari */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
 
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        body::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
 
-    header {
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(15px);
-      padding: 60px 30px;
-      text-align: center;
-      color: var(--primary-color);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-      border-bottom: 3px solid var(--primary-color);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      position: relative;
-      z-index: 10;
-    }
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
 
-    .light-mode {
-      background: var(--light-bg);
-      color: var(--light-text);
-    }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4a148c, #1a237e, #004d40, #827717, #d84315, #ff6f00);
+            background-size: 400% 400%;
+            animation: gradientAnimation 12s infinite alternate; /* Faster, smoother gradient */
+            z-index: -1;
+            opacity: 0.25; /* Slightly less intense */
+        }
 
-    .light-mode header {
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--light-text);
-      text-shadow: none;
-      border-bottom: 3px solid #bfa700;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .light-mode body::before {
-      background: linear-gradient(45deg, #e1bee7, #9fa8da, #80cbc4, #cddc39, #ffab91, #ffb74d);
-      opacity: 0.2;
-    }
+        header {
+            background: rgba(0, 0, 0, 0.8); /* Slightly more opaque header */
+            backdrop-filter: blur(12px); /* Slightly less blur */
+            padding: 40px 30px; /* Adjusted padding */
+            text-align: center;
+            color: var(--primary-color);
+            font-family: var(--font-heading);
+            font-size: 3rem; /* Slightly smaller header font */
+            font-weight: 700;
+            letter-spacing: 1px; /* Reduced letter spacing */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Updated gold shadow */
+            border-bottom: 2px solid var(--primary-color); /* Thinner border */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Softer shadow */
+            position: sticky; /* Make header stick to the top */
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
-    .container {
-      max-width: 1400px;
-      margin: 60px auto;
-      padding: 30px;
-      position: relative;
-      z-index: 5;
-    }
+        header .logo-icon {
+            font-size: 2.5rem;
+        }
 
-    .badge-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-      perspective: 1000px; /* For 3D card effect */
-    }
+        header span {
+            white-space: nowrap;
+        }
 
-    .badge-card {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      transition: transform 0.5s cubic-bezier(0.36, 0.55, 0.06, 0.68), box-shadow 0.5s ease-in-out;
-      box-shadow: 0 8px 20px var(--shadow-dark);
-      backdrop-filter: blur(12px);
-      transform-style: preserve-3d; /* Enable 3D transformations for children */
-    }
+        .light-mode {
+            background: var(--light-bg);
+            color: var(--light-text);
+        }
 
-    .light-mode .badge-card {
-      background: var(--card-light);
-      color: var(--light-text);
-      border: 1px solid var(--border-light);
-      box-shadow: 0 8px 20px var(--shadow-light);
-    }
+        .light-mode header {
+            background: rgba(255, 255, 255, 0.9); /* Slightly more opaque light header */
+            color: var(--light-text);
+            text-shadow: none;
+            border-bottom: 2px solid #b8860b; /* Dark Goldenrod */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Softer shadow */
+        }
 
-    .badge-card:hover {
-      transform: translateY(-8px) rotateY(5deg) rotateX(-5deg) scale(1.03);
-      box-shadow: 0 12px 25px var(--primary-color);
-      border-color: var(--primary-color);
-    }
+        .container {
+            max-width: 1100px; /* Adjusted max width */
+            margin: 30px auto; /* Reduced top margin */
+            padding: 20px; /* Reduced padding */
+            position: relative;
+            z-index: 5;
+        }
 
-    .badge-tier {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly smaller min width */
+            gap: 20px; /* Reduced gap */
+            perspective: 1100px; /* Adjusted perspective */
+        }
 
-    .badge-cost {
-      color: var(--secondary-color);
-      font-size: 1.3rem;
-      margin-bottom: 25px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    }
+        .badge-card {
+            background: var(--card-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px; /* Slightly less rounded */
+            padding: 20px; /* Reduced padding */
+            text-align: center;
+            transition: transform var(--animation-speed) cubic-bezier(0.36, 0.55, 0.06, 0.68), box-shadow var(--animation-speed) ease-in-out;
+            box-shadow: 0 4px 10px var(--shadow-dark); /* Softer shadow */
+            backdrop-filter: blur(8px); /* Slightly less blur */
+            transform-style: preserve-3d;
+            animation: fadeInUp 0.4s ease-out backwards; /* Subtle entrance animation */
+        }
 
-    .buy-button {
-      background: linear-gradient(135deg, #cfa93c, var(--primary-color));
-      color: var(--dark-bg);
-      padding: 15px 35px;
-      border: none;
-      border-radius: 15px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
+        .badge-card:nth-child(2) { animation-delay: 0.1s; }
+        .badge-card:nth-child(3) { animation-delay: 0.2s; }
+        .badge-card:nth-child(4) { animation-delay: 0.3s; }
 
-    .buy-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 300%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: left 0.4s ease-in-out;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .buy-button:hover::before {
-      left: 100%;
-    }
+        .light-mode .badge-card {
+            background: var(--card-light);
+            color: var(--light-text);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 10px var(--shadow-light); /* Softer shadow */
+        }
 
-    .buy-button:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 12px var(--primary-color);
-    }
+        .badge-card:hover {
+            transform: translateY(-3px) rotateY(2deg) rotateX(-2deg) scale(1.01); /* Subtler hover effect */
+            box-shadow: 0 8px 15px var(--primary-color); /* More focused shadow */
+            border-color: var(--primary-color);
+        }
 
-    .leaderboard {
-      margin-top: 80px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(15px);
-      border-radius: 20px;
-      padding: 50px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+        .badge-tier {
+            font-size: 1.6rem; /* Slightly smaller tier font */
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px; /* Reduced margin */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px; /* Reduced gap */
+            text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.3); /* Softer shadow */
+        }
 
-    .light-mode .leaderboard {
-      background: rgba(255, 255, 255, 0.9);
-      color: var(--light-text);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+        .badge-cost {
+            color: var(--secondary-color);
+            font-size: 1.1rem; /* Slightly smaller cost font */
+            margin-bottom: 18px; /* Reduced margin */
+            text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2); /* Softer shadow */
+        }
 
-    .leaderboard h2 {
-      color: var(--primary-color);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-      letter-spacing: 2px;
-    }
+        .buy-button {
+            background: var(--accent-gradient); /* Using the accent gradient */
+            color: var(--dark-bg);
+            padding: 10px 25px; /* Adjusted padding */
+            border: none;
+            border-radius: 10px; /* Slightly less rounded */
+            font-weight: 600; /* Slightly lighter font weight */
+            font-size: 0.9rem; /* Slightly smaller font size */
+            cursor: pointer;
+            transition: transform var(--animation-speed) ease-in-out, box-shadow var(--animation-speed) ease-in-out; /* Faster transition */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Softer shadow */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-    .leaderboard h2::before,
-    .leaderboard h2::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 30px;
-      height: 2px;
-      background-color: var(--primary-color);
-    }
+        .buy-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%; /* Start further left */
+            width: 400%; /* Wider gradient sweep */
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent); /* Subtler highlight */
+            transition: left calc(var(--animation-speed) * 1.5) ease-in-out; /* Adjusted transition speed */
+            z-index: -1;
+        }
 
-    .leaderboard h2::before {
-      left: 10px;
-      transform: translateY(-50%);
-    }
+        .buy-button:hover::before {
+            left: 100%;
+        }
 
-    .leaderboard h2::after {
-      right: 10px;
-      transform: translateY(-50%);
-    }
+        .buy-button:hover {
+            transform: scale(1.03); /* Subtler scale */
+            box-shadow: 0 4px 8px var(--secondary-color); /* Secondary color shadow */
+        }
 
-    .leaderboard-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+        .leaderboard {
+            margin-top: 50px; /* Reduced top margin */
+            background: rgba(0, 0, 0, 0.7); /* Slightly less opaque */
+            backdrop-filter: blur(8px); /* Slightly less blur */
+            border-radius: 12px; /* Slightly less rounded */
+            padding: 30px; /* Reduced padding */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4); /* Softer shadow */
+            animation: fadeInUp 0.5s ease-out 0.3s backwards; /* Subtle entrance animation */
+        }
 
-    .leaderboard-item {
-      background: #1c1c1c;
-      padding: 20px 25px;
-      border-radius: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-left: 5px solid var(--secondary-color);
-      color: #e0f2f7;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .light-mode .leaderboard-item {
-      background: #f9f9f9;
-      color: #444;
-      border-left-color: #bfa700;
-    }
+        .light-mode .leaderboard {
+            background: rgba(255, 255, 255, 0.8); /* Slightly less opaque */
+            color: var(--light-text);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* Softer shadow */
+        }
 
-    .leaderboard-item:first-child {
-      background: #2e2e2e;
-      border-left-color: var(--primary-color);
-      font-weight: bold;
-      color: var(--primary-color);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-    }
+        .leaderboard h2 {
+            color: var(--primary-color);
+            font-family: var(--font-heading);
+            font-size: 2rem; /* Slightly smaller heading */
+            text-align: center;
+            margin-bottom: 25px; /* Reduced margin */
+            position: relative;
+            letter-spacing: 0.5px; /* Reduced letter spacing */
+        }
 
-    .light-mode .leaderboard-item:first-child {
-      background: #eee;
-      color: #bfa700;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        .leaderboard h2::before,
+        .leaderboard h2::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 15px; /* Shorter lines */
+            height: 1px; /* Thinner lines */
+            background-color: var(--primary-color);
+        }
 
-    .leaderboard-item:hover {
-      transform: translateX(5px);
-      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
-    }
+        .leaderboard h2::before {
+            left: 2px; /* Closer to text */
+            transform: translateY(-50%);
+        }
 
-    .light-mode .leaderboard-item:hover {
-      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.05);
-    }
+        .leaderboard h2::after {
+            right: 2px; /* Closer to text */
+            transform: translateY(-50%);
+        }
 
-    .leaderboard-item span {
-      font-weight: 600;
-    }
+        .leaderboard-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Reduced gap */
+        }
 
-    .icon {
-      font-size: 1.5rem;
-      color: var(--primary-color);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    }
+        .leaderboard-item {
+            background: #1a1a1a; /* Slightly lighter dark background */
+            padding: 12px 18px; /* Reduced padding */
+            border-radius: 8px; /* Slightly less rounded */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--secondary-color); /* Thinner border */
+            color: #f0f8ff; /* Alice Blue */
+            transition: transform var(--animation-speed) ease-in-out, box-shadow var(--animation-speed) ease-in-out; /* Faster transition */
+        }
 
-    .toggle-button {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      background-color: var(--primary-color);
-      color: var(--dark-bg);
-      padding: 12px 25px;
-      font-size: 1.3rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 100;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      font-weight: 600;
-    }
+        .light-mode .leaderboard-item {
+            background: #f0f0f0; /* Slightly darker light background */
+            color: #555;
+            border-left-color: #b8860b; /* Dark Goldenrod */
+        }
 
-    .toggle-button:hover {
-      background-color: #bfa700;
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    }
+        .leaderboard-item:first-child {
+            background: #282828; /* Slightly lighter first child background */
+            border-left-color: var(--primary-color);
+            font-weight: bold;
+            color: var(--primary-color);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Softer shadow */
+        }
 
-    /* Futuristic Loader (Optional - for potential dynamic content loading) */
-    .loader-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
+        .light-mode .leaderboard-item:first-child {
+            background: #e0e0e0; /* Slightly darker first child background */
+            color: #b8860b;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
 
-    .loader-container.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        .leaderboard-item:hover {
+            transform: translateX(2px); /* Subtler hover */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); /* Softer shadow */
+        }
 
-    .loader {
-      border: 8px solid #f3f3f3; /* Light grey border */
-      border-top: 8px solid var(--primary-color); /* Primary color top */
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 2s linear infinite;
-    }
+        .light-mode .leaderboard-item:hover {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Softer shadow */
+        }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+        .leaderboard-item span {
+            font-weight: 500; /* Slightly lighter font weight */
+            font-size: 0.95rem;
+        }
+
+        .icon {
+            font-size: 1.2rem; /* Slightly smaller icon */
+            color: var(--primary-color);
+            text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.2); /* Softer shadow */
+            vertical-align: middle; /* Align icons with text */
+        }
+
+        .toggle-button {
+            position: fixed;
+            top: 15px; /* Slightly closer to the top */
+            right: 15pxbackground-color: var(--secondary-color); /* Updated toggle button color */
+            color: var(--dark-bg);
+            padding: 8px 16px; /* Adjusted padding */
+            font-size: 0.9rem; /* Slightly smaller font */
+            border-radius: 20px; /* Slightly less rounded */
+            cursor: pointer;
+            transition: background-color var(--animation-speed) ease, transform var(--animation-speed) ease, box-shadow var(--animation-speed) ease; /* Faster transition */
+            z-index: 100;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Softer shadow */
+            font-weight: 500; /* Slightly lighter font weight */
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-button:hover {
+            background-color: var(--tertiary-color); /* Updated hover color */
+            transform: translateY(-2px) scale(1.03); /* Subtler hover */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* More defined shadow */
+        }
+
+        .toggle-button .sun-icon,
+        .toggle-button .moon-icon {
+            font-size: 1rem;
+        }
+
+        /* Futuristic Loader (Optional) */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Slightly less opaque */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--animation-speed) ease, visibility var(--animation-speed) ease; /* Faster transition */
+        }
+
+        .loader-container.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loader {
+            border: 6px solid #f3f3f3; /* Lighter border */
+            border-top: 6px solid var(--secondary-color); /* Updated loader color */
+            border-radius: 50%;
+            width: 40px; /* Smaller loader */
+            height: 40px; /* Smaller loader */
+            animation: spin 1.5s linear infinite; /* Faster spin */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            color: var(--dark-text);
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .light-mode footer {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--light-text);
+        }
+    </style>
 </head>
 <script>
-  // Initialize icons once DOM is ready
-  window.onload = function() {
-    lucide.createIcons();
-  };
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
 
-  function toggleMode() {
-    const body = document.body;
-    const sunIcon = document.querySelector(".sun-icon");
-    const moonIcon = document.querySelector(".moon-icon");
+        const body = document.body;
+        const header = document.querySelector("header");
+        const badgeCards = document.querySelectorAll(".badge-card");
+        const leaderboard = document.querySelector(".leaderboard");
+        const sunIcon = document.querySelector(".sun-icon");
+        const moonIcon = document.querySelector(".moon-icon");
 
-    body.classList.toggle("light-mode");
+        function toggleMode() {
+            body.classList.toggle("light-mode");
+            header.classList.toggle("light-mode");
+            badgeCards.forEach(card => card.classList.toggle("light-mode"));
+            leaderboard.classList.toggle("light-mode");
+            document.querySelector("footer").classList.toggle("light-mode");
 
-    // Toggle icon visibility
-    const isLight = body.classList.contains("light-mode");
-    sunIcon.style.display = isLight ? "none" : "inline-block";
-    moonIcon.style.display = isLight ? "inline-block" : "none";
-  }
+            const isLight = body.classList.contains("light-mode");
+            sunIcon.style.display = isLight ? "none" : "inline-block";
+            moonIcon.style.display = isLight ? "inline-block" : "none";
+        }
+
+        const toggleButton = document.querySelector(".toggle-button");
+        if (toggleButton) {
+            toggleButton.addEventListener("click", toggleMode);
+        }
+
+        // Initial icon setup
+        if (body.classList.contains("light-mode")) {
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "inline-block";
+        }
+
+        // Example of a more robust loader trigger (you'd adapt this to your actual data fetching)
+        function showLoader() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.classList.add('active');
+            }
+        }
+
+        function hideLoader() {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.classList.remove('active');
+            }
+        }
+
+        // Simulate loading for demonstration
+        // showLoader();
+        // setTimeout(hideLoader, 3000);
+
+        // More dynamic leaderboard update example
+        // function updateLeaderboard(data) {
+        //     const leaderboardList = document.querySelector('.leaderboard-list');
+        //     leaderboardList.innerHTML = ''; // Clear existing items
+        //     data.forEach((item, index) => {
+        //         const listItem = document.createElement('div');
+        //         listItem.classList.add('leaderboard-item');
+        //         listItem.innerHTML = `
+        //             <span>${index + 1}. <i data-lucide="user" style="margin-right: 5px;"></i> ${item.username}</span>
+        //             <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 5px;"></i> ${item.score.toLocaleString()}</span>
+        //         `;
+        //         leaderboardList.appendChild(listItem);
+        //         lucide.createIcons(listItem); // Re-render icons in new elements
+        //     });
+        // }
+
+        // Example leaderboard data
+        // const leaderboardData = [
+        //     { username: "ElitePlayerX", score: 1500000 },
+        //     { username: "MasterBuilder", score: 1200000 },
+        //     { username: "SpeedyGonzales", score: 900000 },
+        //     { username: "CoolGamer123", score: 750000 },
+        // ];
+        // setTimeout(() => {
+        //     hideLoader();
+        //     updateLeaderboard(leaderboardData);
+        // }, 4000);
+
+        const viewFullLeaderboardButton = document.querySelector('.leaderboard .buy-button');
+        if (viewFullLeaderboardButton) {
+            viewFullLeaderboardButton.addEventListener('click', function() {
+                alert('Full leaderboard functionality would be implemented here.');
+            });
+        }
+    });
 </script>
 
 <body>
 
-  <header>
-    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-      <i class="icon" data-lucide="rocket"></i>
-      <span>Roblox <span style="color: var(--secondary-color);">Elites</span></span>
-      <i class="icon" data-lucide="award"></i>
-    </div>
-  </header>
+    <header>
+        <i class="logo-icon icon" data-lucide="rocket"></i>
+        <span>Roblox <span style="color: var(--secondary-color);">Elites</span></span>
+        <i class="logo-icon icon" data-lucide="award"></i>
+    </header>
 
-  <button class="toggle-button" onclick="toggleMode()">
-    <i data-lucide="sun" class="sun-icon"></i><i data-lucide="moon" class="moon-icon" style="display: none;"></i>
-    <span>Mode</span>
-  </button>
+    <button class="toggle-button">
+        <i data-lucide="sun" class="sun-icon"></i><i data-lucide="moon" class="moon-icon" style="display: none;"></i>
+        <span>Mode</span>
+    </button>
 
-  <div class="container">
-    <div class="badge-grid">
-      <div class="badge-card">
-        <div class="badge-tier"><i class="icon" data-lucide="star"></i> VIP <span style="font-size: 1rem; color: #aaa;">(Tier 1)</span></div>
-        <div class="badge-cost"><span>&#8490;</span> 10,000</div>
-        <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/132200464895232/VIP-STATUS'">
-          <i data-lucide="shopping-cart" style="margin-right: 8px;"></i> Get VIP
-        </button>
-      </div>
-      <div class="badge-card">
-        <div class="badge-tier"><i class="icon" data-lucide="shield"></i> Elite <span style="font-size: 1rem; color: #aaa;">(Tier 2)</span></div>
-        <div class="badge-cost"><span>&#8490;</span> 50,000</div>
-        <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/12390995523238250/ELITE'">
-          <i data-lucide="shield-check" style="margin-right: 8px;"></i> Become Elite
-        </button>
-      </div>
-      <div class="badge-card">
-        <div class="badge-tier"><i class="icon" data-lucide="gem"></i> Luminar <span style="font-size: 1rem; color: #aaa;">(Tier 3)</span></div>
-        <div class="badge-cost"><span>&#8490;</span> 250,000</div>
-        <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/127763974284043/LUMINAR-STATUS'">
-          <i data-lucide="sparkles" style="margin-right: 8px;"></i> Unlock Luminar
-        </button>
-      </div>
-      <div class="badge-card">
-        <div class="badge-tier"><i class="icon" data-lucide="crown"></i> Imperial <span style="font-size: 1rem; color: #aaa;">(Tier 4)</span></div>
-        <div class="badge-cost"><span style="font-size: 1.5rem;">&#8490;</span> 1,000,000</div>
-        <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/96576976364713/IMPERIAL-CROWN'">
-          <i data-lucide="trophy" style="margin-right: 8px;"></i> Claim Imperial Crown
-        </button>
-      </div>
-    </div>
-
-    <div class="leaderboard">
-      <h2><i data-lucide="podium" style="margin-right: 10px;"></i> Hall of Legends <i data-lucide="podium" style="margin-left: 10px;"></i></h2>
-      <div class="leaderboard-list">
-        <div class="leaderboard-item">
-          <span>1. <i data-lucide="user-check" style="color: var(--primary-color); margin-right: 5px;"></i> </span>
-          <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 5px;"></i> 1,000,000</span>
+    <div class="container">
+        <div class="badge-grid">
+            <div class="badge-card">
+                <div class="badge-tier"><i class="icon" data-lucide="star"></i> VIP <span style="font-size: 0.9rem; color: #aaa;">(Tier 1)</span></div>
+                <div class="badge-cost"><span>&#8490;</span> 10,000</div>
+                <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/132200464895232/VIP-STATUS'">
+                    <i data-lucide="shopping-cart" style="margin-right: 6px;"></i> Get VIP
+                </button>
+            </div>
+            <div class="badge-card">
+                <div class="badge-tier"><i class="icon" data-lucide="shield"></i> Elite <span style="font-size: 0.9rem; color: #aaa;">(Tier 2)</span></div>
+                <div class="badge-cost"><span>&#8490;</span> 50,000</div>
+                <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/12390995523238250/ELITE'">
+                    <i data-lucide="shield-check" style="margin-right: 6px;"></i> Become Elite
+                </button>
+            </div>
+            <div class="badge-card">
+                <div class="badge-tier"><i class="icon" data-lucide="gem"></i> Luminar <span style="font-size: 0.9rem; color: #aaa;">(Tier 3)</span></div>
+                <div class="badge-cost"><span>&#8490;</span> 250,000</div>
+                <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/127763974284043/LUMINAR-STATUS'">
+                    <i data-lucide="sparkles" style="margin-right: 6px;"></i> Unlock Luminar
+                </button>
+            </div>
+            <div class="badge-card">
+                <div class="badge-tier"><i class="icon" data-lucide="crown"></i> Imperial <span style="font-size: 0.9rem; color: #aaa;">(Tier 4)</span></div>
+                <div class="badge-cost"><span style="font-size: 1.3rem;">&#8490;</span> 1,000,000</div>
+                <button class="buy-button" onclick="window.location.href='https://www.roblox.com/games/96576976364713/IMPERIAL-CROWN'">
+                    <i data-lucide="trophy" style="margin-right: 6px;"></i> Claim Imperial Crown
+                </button>
+            </div>
         </div>
-        <div class="leaderboard-item">
-          <span>2. <i data-lucide="user" style="margin-right: 5px;"></i> </span>
-          <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 5px;"></i> 250,000</span>
+
+        <div class="leaderboard">
+            <h2><i data-lucide="podium" style="margin-right: 8px;"></i> Hall of Legends <i data-lucide="podium" style="margin-left: 8px;"></i></h2>
+            <div class="leaderboard-list">
+                <div class="leaderboard-item">
+                    <span>1. <i data-lucide="user-check" style="color: var(--primary-color); margin-right: 4px;"></i> ElitePlayer</span>
+                    <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 4px;"></i> 1,000,000</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span>2. <i data-lucide="user" style="margin-right: 4px;"></i> ProBuilder</span>
+                    <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 4px;"></i> 750,000</span>
+                </div>
+                <div class="leaderboard-item">
+                    <span>3. <i data-lucide="user" style="margin-right: 4px;"></i> FastRunner</span>
+                    <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 4px;"></i> 500,000</span>
+                </div>
+            </div>
+            <button class="buy-button" style="margin-top: 25px; width: fit-content; margin-left: auto; margin-right: auto;">
+                <i data-lucide="list-ordered" style="margin-right: 6px;"></i> View Full Leaderboard
+            </button>
         </div>
-        <div class="leaderboard-item">
-          <span>3. <i data-lucide="user" style="margin-right: 5px;"></i> </span>
-          <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 5px;"></i> 50,000</span>
-        </div>
-      </div>
-      <button class="buy-button" style="margin-top: 30px; width: fit-content; margin-left: auto; margin-right: auto;">
-        <i data-lucide="list-ordered" style="margin-right: 8px;"></i> View Full Leaderboard
-      </button>
     </div>
-  </div>
 
-  <div class="loader-container" id="loader">
-    <div class="loader"></div>
-  </div>
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+    </div>
 
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
+    <footer>
+        &copy; 2025 Roblox Elites - Ascend Your Status
+    </footer>
 
-    const body = document.body;
-    const header = document.querySelector("header");
-    const badgeCards = document.querySelectorAll(".badge-card");
-    const leaderboard = document.querySelector(".leaderboard");
-    const sunIcon = document.querySelector(".sun-icon");
-    const moonIcon = document.querySelector(".moon-icon");
-
-    // Toggle between light and dark mode
-    function toggleMode() {
-      body.classList.toggle("light-mode");
-      header.classList.toggle("light-mode");
-      badgeCards.forEach(card => card.classList.toggle("light-mode"));
-      leaderboard.classList.toggle("light-mode");
-
-      // Toggle Sun/Moon icon visibility
-      if (body.classList.contains("light-mode")) {
-        sunIcon.style.display = "none";
-        moonIcon.style.display = "inline-block";
-      } else {
-        sunIcon.style.display = "inline-block";
-        moonIcon.style.display = "none";
-      }
-    }
-
-    // Initial icon setup
-    if (body.classList.contains("light-mode")) {
-      sunIcon.style.display = "none";
-      moonIcon.style.display = "inline-block";
-    }
-
-    // Example of how you might trigger the loader (you'd integrate this with actual data fetching)
-    // function loadDynamicContent() {
-    //  const loader = document.getElementById('loader');
-    //  loader.classList.add('active');
-    //  setTimeout(() => {
-    //    // Simulate data loading
-    //    loader.classList.remove('active');
-    //    // Update leaderboard content here dynamically
-    //    const leaderboardList = document.querySelector('.leaderboard-list');
-    //    leaderboardList.innerHTML += `
-    //      <div class="leaderboard-item">
-    //        <span>4. <i data-lucide="user" style="margin-right: 5px;"></i> NewChallenger123</span>
-    //        <span><i data-lucide="badge-dollar-sign" style="color: var(--secondary-color); margin-right: 5px;"></i> 500,000</span>
-    //      </div>
-    //    `;
-    //  }, 2000);
-    // }
-
-    // You could call loadDynamicContent() on page load or based on user interaction
-    // loadDynamicContent();
-  </script>
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </body>
 </html>
