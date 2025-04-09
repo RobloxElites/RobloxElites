@@ -343,6 +343,26 @@
     }
   </style>
 </head>
+<script>
+  // Initialize icons once DOM is ready
+  window.onload = function() {
+    lucide.createIcons();
+  };
+
+  function toggleMode() {
+    const body = document.body;
+    const sunIcon = document.querySelector(".sun-icon");
+    const moonIcon = document.querySelector(".moon-icon");
+
+    body.classList.toggle("light-mode");
+
+    // Toggle icon visibility
+    const isLight = body.classList.contains("light-mode");
+    sunIcon.style.display = isLight ? "none" : "inline-block";
+    moonIcon.style.display = isLight ? "inline-block" : "none";
+  }
+</script>
+
 <body>
 
   <header>
